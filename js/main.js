@@ -16,9 +16,9 @@ ourRequest.onload = function() {
           <img class="first-image img-fluid img-thumbnail" src=" ${(o.json_metadata.hasOwnProperty("image")) ? o.json_metadata.image[0] : ""} "/>
         </div>
         <div class="col">
-          <p class="moderator">Mod: ${o["moderator"]}</p>
-          <p class="author">Author: ${o["author"]}</p>
-          <p class="status">Status: ${ (o["reviewed"]) ? "approved" : "rejected"}</p>
+          <a href="https://utopian.io${o.url}"> ${o.title}</a>
+          <p class="author">${o["author"]}</p>
+          <p class="moderator">${o["moderator"]} ${ (o["reviewed"]) ? "approved" : "rejected"}</p>
         </div>
       </div>
     </div>
