@@ -1,5 +1,5 @@
 var ourRequest = new XMLHttpRequest();
-ourRequest.open('GET', 'https://api.utopian.io/api/posts/?type=graphics&limit=20&status=reviewed');
+ourRequest.open('GET', 'https://api.utopian.io/api/posts/?type=graphics&limit=50');
 ourRequest.onload = function() {
 
   var obj = JSON.parse(ourRequest.responseText);
@@ -13,9 +13,7 @@ ourRequest.onload = function() {
     <div class="container new-post">
       <div class="row">
         <div class="col">
-          <!--<img class="first-image img-fluid img-thumbnail" src="${o.json_metadata.image[0]}"></img>-->
-          <img class="first-image img-fluid img-thumbnail" src="${ (o.json_metadata.hasOwnProperty("image")) ? o.json_metadata.image[0] : "" }"></img>
-
+          <img class="first-image img-fluid img-thumbnail" src=" ${(o.json_metadata.hasOwnProperty("image")) ? o.json_metadata.image[0] : ""} "/>
         </div>
         <div class="col">
           <p class="moderator">Mod: ${o["moderator"]}</p>
