@@ -11,7 +11,9 @@ function myFunc() {
   ourRequest.onload = function() {
     var obj = JSON.parse(ourRequest.responseText);
 
-    for (o of obj["results"]) {
+    document.getElementById("app").innerHTML = "";
+
+    for (o of obj.results) {
       console.log(o);
       document.getElementById("app").innerHTML += `
       <div class="container new-post">
@@ -21,31 +23,37 @@ function myFunc() {
           </div>
           <div class="col">
             <a href="https://utopian.io${o.url}"> ${o.title}</a>
-            <p class="author">${o["author"]}</p>
-            <p class="moderator">${ (o["reviewed"]) ? "approved" : "rejected"} by ${o["moderator"]} </p>
-            <button id="showInPage" type="button" onclick="showInPage()">Show *WIP</button>
+            <p class="author">${o.author}</p>
+            <p class="moderator">${(o.reviewed) ? "approved" : "rejected"} by ${o.moderator} </p>
+            <button id="showInPage" type="button">Show *WIP</button>
           </div>
         </div>
       </div>
       `
 
+      document.getElementById("showInPage").addEventListener("click", function() {
+        var converter = new showdown.Converter();
+        var md = o.body;
+        var html = converter.makeHtml(md);
+
+        document.getElementById("sapp").innerHTML = `
+        <div class="container">
+          <div class="row">
+            <div class="col">
+              ${html}
+            </div>
+          </div>
+        </div>
+        `
+      }, false);
     }
 
-    // function showInPage() {
-    //   var converter = new showdown.Converter();
-    //   var md = `${o.body}`;
-    //   var html = converter.makeHtml(md);
-    //
-    //   document.getElementById("sapp").innerHTML += `
-    //   <div class="container new-post">
-    //     <div class="row">
-    //       <div class="col">
-    //         ${html}
-    //       </div>
-    //     </div>
-    //   </div>
-    //   `
-    // }
+
+
+
+    function showInPage(bo) {
+
+    }
 
   }
   ourRequest.send();
