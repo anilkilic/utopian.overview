@@ -17,12 +17,16 @@ function myFunc() {
       console.log(o);
       document.getElementById("left-side").innerHTML += `
       <div class="card">
-          <img class="img-fluid" src="${(o.json_metadata.hasOwnProperty("image")) ? o.json_metadata.image[0] : ""}" alt="Card image cap">
+          <img class="img-fluid" src="${(o.json_metadata.hasOwnProperty("image")) ? o.json_metadata.image[0] : ""}" alt="">
+          <a class="btn-floating btn-action" href="#"><i class="fa fa-chevron-right"></i></a>
+
           <div class="card-body">
               <h4 class="card-title"><a href="https://utopian.io${o.url}"> ${o.title}</a></h4>
-              <p class="card-text">${o.author}</p>
-              <p class="card-text">${(o.reviewed) ? "approved" : "rejected"} by ${o.moderator}</p>
+              <p class="card-text">by <a target="_blank" href="https://steemit.com/@${o.author}">${o.author}</a> | <span>${(o.reviewed) ? "approved" : "rejected"} by <strong>${o.moderator}</strong></span></p>
               <a href="#" id="showInPage" class="btn btn-primary">Show</a>
+          </div>
+          <div class="card-footer text-muted">
+            ${moment(o.json_metadata.moderator.time).fromNow()}
           </div>
       </div>
       `
