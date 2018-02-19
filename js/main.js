@@ -7,27 +7,23 @@ function myFunc() {
 
 
   ourRequest.open('GET', `https://api.utopian.io/api/posts/?type=${type}&status=${status}&limit=${parseInt(limit)}`);
-  console.log(`https://api.utopian.io/api/posts/?type=${type}&status=${status}&limit=${parseInt(limit)}`)
+
   ourRequest.onload = function() {
     var obj = JSON.parse(ourRequest.responseText);
 
-    document.getElementById("app").innerHTML = "";
+    document.getElementById("left-side").innerHTML = "";
 
     for (o of obj.results) {
       console.log(o);
-      document.getElementById("app").innerHTML += `
-      <div class="container new-post">
-        <div class="row">
-          <div class="col">
-            <img class="first-image img-fluid img-thumbnail" src=" ${(o.json_metadata.hasOwnProperty("image")) ? o.json_metadata.image[0] : ""} "/>
+      document.getElementById("left-side").innerHTML += `
+      <div class="card">
+          <img class="img-fluid" src="${(o.json_metadata.hasOwnProperty("image")) ? o.json_metadata.image[0] : ""}" alt="Card image cap">
+          <div class="card-body">
+              <h4 class="card-title"><a href="https://utopian.io${o.url}"> ${o.title}</a></h4>
+              <p class="card-text">${o.author}</p>
+              <p class="card-text">${(o.reviewed) ? "approved" : "rejected"} by ${o.moderator}</p>
+              <a href="#" id="showInPage" class="btn btn-primary">Show</a>
           </div>
-          <div class="col">
-            <a href="https://utopian.io${o.url}"> ${o.title}</a>
-            <p class="author">${o.author}</p>
-            <p class="moderator">${(o.reviewed) ? "approved" : "rejected"} by ${o.moderator} </p>
-            <button id="showInPage" type="button">Show *WIP</button>
-          </div>
-        </div>
       </div>
       `
 
@@ -36,8 +32,11 @@ function myFunc() {
         var md = o.body;
         var html = converter.makeHtml(md);
 
-        document.getElementById("sapp").innerHTML = `
+        document.getElementById("right-side").innerHTML = `
         <div class="container">
+          <div class="alert alert-info" role="alert">
+            <a target="_blank" href="${o.json_metadata.repository.html_url}">${o.json_metadata.repository.full_name}</a>
+          </div>
           <div class="row">
             <div class="col">
               ${html}

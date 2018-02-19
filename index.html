@@ -1,6 +1,7 @@
 <html>
     <head>
       <title>Utopian Overview</title>
+      <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
       <link rel="stylesheet" type="css" href="css/style.css">
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
       <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.8.6/showdown.min.js"></script>
@@ -8,27 +9,36 @@
     <body>
       <div class="row">
         <div class="col">
-          <center>
-            <select id="type" name="type">
-              <option value="graphics">Graphics</option>
-            </select>
-            <select id="status" name="status">
-              <option value="approved">Approved</option>
-              <option value="flagged">Rejected</option>
-              <option value="approved">Waiting *WIP</del></option>
-            </select>
-            <select id="limit" name="limit">
-              <option value="10">10</option>
-              <option value="50">50</option>
-              <option value="100">100</option>
-            </select>
-            <button id="query" type="button" onclick="myFunc()">Query</button>
-          </center>
+          <form>
+            <div class="form-group col-6 offset-3">
+              <div class="row">
+                <select class="form-control col-3" id="type" name="type">
+                  <option value="graphics">Graphics</option>
+                </select>
+                <select class="form-control col-3" id="status" name="status">
+                  <option value="approved">Approved</option>
+                  <option value="flagged">Rejected</option>
+                  <option value="approved">Waiting *WIP</del></option>
+                </select>
+                <select class="form-control col-3" id="limit" name="limit">
+                  <option value="10">10</option>
+                  <option value="50">50</option>
+                  <option value="100">100</option>
+                </select>
+                <button class="btn btn-primary col-3" id="query" type="button" onclick="myFunc()">Query</button>
+              </div>
+              <hr>
+            </div>
+          </form>
         </div>
       </div>
       <div class="row">
-        <div id="app" class="col"></div>
-        <div id="sapp" class="col"></div>
+        <div id="left-side" class="col-5">
+
+        </div>
+        <div id="right-side" class="col-7">
+
+        </div>
       </div>
         <script src="js/main.js"></script>
     </body>
